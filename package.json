@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx gulp",
     "build": "npx gulp prod",
-    "prod": "npx gulp prod"
+    "prod": "npx gulp prod",
+    "clean": "npx gulp clean"
   },
   "keywords": [],
   "author": "",

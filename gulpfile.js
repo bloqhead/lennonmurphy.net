@@ -82,7 +82,7 @@ function devClean() {
 }
 
 function prodHTML() {
-  return src("./src/**/*.html").pipe(dest("./build"));
+  return src("./src/**/*.html").pipe(dest("./public"));
 }
 
 function prodStyles() {
@@ -125,7 +125,7 @@ function prodImages() {
 function prodClean() {
   console.log("\n\tCleaning build folder for fresh start...\n");
 
-  return del(["./build"]);
+  return del(["./public"]);
 }
 
 function buildFinish(done) {
@@ -145,3 +145,5 @@ exports.prod = series(
   parallel(prodStyles, prodScripts, prodImages, prodHTML),
   buildFinish
 );
+
+exports.clean = series(parallel(devClean, prodClean));
