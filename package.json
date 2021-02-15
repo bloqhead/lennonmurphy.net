@@ -1,0 +1,33 @@
+{
+  "name": "lennonmurphy.net",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx gulp",
+    "build": "npx gulp prod",
+    "prod": "npx gulp prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.2.4",
+    "browser-sync": "^2.26.14",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-postcss": "^9.0.0",
+    "gulp-purgecss": "^4.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-terser": "^2.0.1"
+  },
+  "dependencies": {
+    "postcss": "^8.2.6",
+    "tailwindcss": "^2.0.3"
+  }
+}
