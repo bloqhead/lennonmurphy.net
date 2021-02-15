@@ -86,7 +86,7 @@ function prodHTML() {
 }
 
 function prodStyles() {
-  return src("./dist/css")
+  return src("./dist/css/**/*")
     .pipe(
       purgeCSS({
         content: ["src/**/*.{html,js}"],
