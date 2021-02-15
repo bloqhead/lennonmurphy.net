@@ -82,7 +82,7 @@ function devClean() {
 }
 
 function prodHTML() {
-  return src("./src/**/*.html").pipe("./build");
+  return src("./src/**/*.html").pipe(dest("./build"));
 }
 
 function prodStyles() {
@@ -115,7 +115,7 @@ function prodScripts() {
       })
     )
     .pipe(uglify())
-    .pipe("./build/js");
+    .pipe(dest("./build/js"));
 }
 
 function prodImages() {
