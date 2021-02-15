@@ -104,7 +104,7 @@ function prodStyles() {
         compatibility: "ie8",
       })
     )
-    .pipe(dest("./build/css"));
+    .pipe(dest("./public/css"));
 }
 
 function prodScripts() {
@@ -115,11 +115,11 @@ function prodScripts() {
       })
     )
     .pipe(uglify())
-    .pipe(dest("./build/js"));
+    .pipe(dest("./public/js"));
 }
 
 function prodImages() {
-  return src("./src/img/**/*").pipe(imagemin()).pipe(dest("./build/img"));
+  return src("./src/img/**/*").pipe(imagemin()).pipe(dest("./public/img"));
 }
 
 function prodClean() {
