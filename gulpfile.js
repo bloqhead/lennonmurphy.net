@@ -86,7 +86,18 @@ function prodHTML() {
 }
 
 function prodStyles() {
-  return src("./dist/css/**/*")
+  const tailwindcss = require("tailwindcss");
+
+  return src("./src/scss/**/*")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(
+      postcss([tailwindcss("./tailwind.config.js"), require("autoprefixer")])
+    )
+    .pipe(
+      concat({
+        path: "styles.css",
+      })
+    )
     .pipe(
       purgeCSS({
         content: ["src/**/*.{html,js}"],
