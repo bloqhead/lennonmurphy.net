@@ -1,0 +1,89 @@
+{% extends "_partials/_main.njk" %}
+
+{% from "_partials/_macros.njk" import pageHeader, job, list, splitTitle %}
+
+{% block main %}
+<header class="main-header text-center mb-4 md:mb-12">
+  <h1 class="main-header__title inline-block text-lg md:text-4xl bg-blue-200 text-blue-800 p-4 leading-none rounded-lg font-serif font-bold">
+    Lennon Murphy
+  </h1>
+</header>
+{# <header class="main-header sm:flex sm:place-content-center sm:place-items-center sm:gap-4">
+  <div class="sm:flex-1">
+    <h1 class="inline-block text-lg md:text-4xl bg-gray-200 p-4 leading-none rounded-lg font-serif font-bold">
+      Lennon Murphy
+    </h1>
+  </div>
+  <address class="sm:justify-self-end not-italic text-base">
+    5340 Daggett Ave<br />
+    St. Louis, Mo. 63110<br />
+    <a href="tel:+314-236-1751">(314) 236-1751</a>
+  </address>
+</header> #}
+
+<section class="page-section objective my-4 md:my-8">
+  {{ pageHeader('Objective') }}
+  <p>
+    I am looking to bring my diverse management experience to a company that I
+    can grow with long-term. I am a hard worker, dedicated, willing to relocate,
+    and always maintain the highest standards.
+  </p>
+</section>
+
+<section class="page-section experience">
+  {{ pageHeader('Experience') }}
+  {% call job("Zia's Restaurant and Catering", "May 2015 &mdash; Present") -%}
+  <div class="md:flex md:gap-4">
+    <div class="md:flex-1">
+      {{ splitTitle('Catering Manager', 'June 2019 &mdash; Present') }}
+      {% call list() -%}
+        <li>Receive, plan, and execute 750+ orders a year, including large scale events, serving over 30,000 people per year.</li>
+        <li>Manage all daily operations, sales, inventory, and food costs.</li>
+        <li>Manage event transportation, setup, execution, and clean up, with scales ranging from 15 to 600 people. Event setup including table placement, presentation and keeping an eye for ways to improve efficiency.</li>
+        <li>Increased sales by 16% in the months prior to the pandemic, helping to maintain a 500K plus income to the business.</li>
+        <li>Manage a staff up to 10 people, depending on order volume, including cooks, prep cooks, drivers, porters, and servers. Schedule and hire event staff as necessary.</li>
+        <li>Develop and maintain customer relations with hospitals, unions, small and large businesses, individual households; helping to maintain a 90% return rate.</li>
+        <li>Develop new ways to maintain business during the pandemic, including new menu items designed for smaller gatherings and individual packaging as needed.</li>
+      {%- endcall %}
+    </div>
+    <div class="md:flex-1">
+      {{ splitTitle('Assistant Catering Manager', 'May 2015 &mdash; June 2019') }}
+      {% call list() -%}
+        <li>Duties included double checking orders for accuracy, supervising the preparation and cooking of orders and delivery, as necessary.</li>
+      {%- endcall %}
+    </div>
+  </div>
+  {%- endcall %}
+  
+  {% call job('Drunken Fish', 'March 2014 &mdash; May 2015') -%}
+  <div>
+    {{ splitTitle('Line Cook Supervisor', 'March 2014 &mdash; May 2015') }}
+    {% call list() -%}
+      <li>Duties included ensuring inventory was maintained at appropriate levels and kept in proper food handling conditions. Assisting in completing orders should any help be required.</li>
+    {%- endcall %}
+  </div>
+  {%- endcall %}
+  
+  {% call job('Front Porch Restaurant &amp; Pie Shop', 'Feb 2010 &mdash; Feb 2014') -%}
+  <div>
+    {{ splitTitle('Short Order Cook', 'Feb 2010 &mdash; Feb 2014') }}
+    {% call list() -%}
+      <li>Large volume kitchen serving breakfast, lunch, and dinner; with a large diverse menu.</li>
+    {%- endcall %}
+  </div>
+  {%- endcall %}
+</section>
+
+<section class="page-section education">
+  {{ pageHeader('Education') }}
+  {% call job('Lecanto High School &mdash; Lecanto, FL', '2009: GPA 3.80') -%}
+  <div>
+    {% call list() -%}
+      <li>Member of National Honor Society</li>
+      <li>Speech Club</li>
+      <li>President of the Florida Future Educators of America</li>
+    {%- endcall %}
+  </div>
+  {%- endcall %}
+</section>
+{% endblock %}

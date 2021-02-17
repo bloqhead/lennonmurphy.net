@@ -11,6 +11,13 @@ const imagemin = require("gulp-imagemin");
 const cleanCSS = require("gulp-clean-css");
 const purgeCSS = require("gulp-purgecss");
 const autoprefixer = require("autoprefixer");
+const nunjucks = require("gulp-nunjucks-html");
+
+const logStyles = {
+  good: "color: #00ff00",
+  bad: "color: #ff0000",
+  okay: "color: #ffff00",
+};
 
 function livePreview(done) {
   browserSync.init({
@@ -24,13 +31,23 @@ function livePreview(done) {
 }
 
 function previewReload(done) {
-  console.log("\n\tReloading browser preview...\n");
+  console.log("\n\t%cReloading browser preview...\n", logStyles.good);
   browserSync.reload();
   done();
 }
 
-function devHTML() {
-  return src("./src/**/*.html").pipe(dest("./dist/"));
+function devNunjucks() {
+  return src(["./src/templates/*.html", "./src/templates/*.njk"])
+    .pipe(
+      nunjucks({
+        searchPaths: ["./src/templates"],
+        ext: ".html",
+      })
+    )
+    .on("error", function (err) {
+      console.log(`\n\t%c${err}`, logStyles.bad);
+    })
+    .pipe(dest("./dist"));
 }
 
 function devStyles() {
@@ -64,7 +81,10 @@ function devImages() {
 }
 
 function watchFiles() {
-  watch("./src/**/*.html", series(devHTML, previewReload));
+  watch(
+    ["./src/templates/**/*.html", "./src/templates/**/*.njk"],
+    series(devNunjucks, previewReload)
+  );
   watch(
     ["./tailwind.config.js", "./src/scss/**/*"],
     series(devStyles, previewReload)
@@ -72,17 +92,30 @@ function watchFiles() {
   watch("./src/js/**/*.js", series(devScripts, previewReload));
   watch("./src/img/**/*", series(devImages, previewReload));
 
-  console.log("\n\tWatching for changes...\n");
+  console.log("\n\t%cWatching for changes...\n", logStyles.good);
 }
 
 function devClean() {
-  console.log("\n\tCleaning dist folder for fresh start...\n");
+  console.log(
+    "\n\t%cCleaning dist folder for fresh start...\n",
+    logStyles.good
+  );
 
   return del(["./dist"]);
 }
 
-function prodHTML() {
-  return src("./src/**/*.html").pipe(dest("./public"));
+function prodNunjucks() {
+  return src(["./src/templates/*.html", "./src/templates/*.njk"])
+    .pipe(
+      nunjucks({
+        searchPaths: ["./src/templates"],
+        ext: ".html",
+      })
+    )
+    .on("error", function (err) {
+      console.log(`\n\t%c${err}`, logStyles.bad);
+    })
+    .pipe(dest("./public"));
 }
 
 function prodStyles() {
@@ -100,7 +133,7 @@ function prodStyles() {
     )
     .pipe(
       purgeCSS({
-        content: ["src/**/*.{html,js}"],
+        content: ["src/**/*.{html,js,njk}"],
         defaultExtractor: (content) => {
           const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
           const innerMatches =
@@ -134,26 +167,32 @@ function prodImages() {
 }
 
 function prodClean() {
-  console.log("\n\tCleaning build folder for fresh start...\n");
+  console.log(
+    "\n\t%cCleaning build folder for fresh start...\n",
+    logStyles.good
+  );
 
   return del(["./public"]);
 }
 
 function buildFinish(done) {
-  console.log('\n\tProduction build complete. Files located in "build".');
+  console.log(
+    '\n\t%cProduction build complete. Files located in "build".',
+    logStyles.good
+  );
   done();
 }
 
 exports.default = series(
   devClean,
-  parallel(devStyles, devScripts, devImages, devHTML),
+  parallel(devStyles, devScripts, devImages, devNunjucks),
   livePreview,
   watchFiles
 );
 
 exports.prod = series(
   prodClean,
-  parallel(prodStyles, prodScripts, prodImages, prodHTML),
+  parallel(prodStyles, prodScripts, prodImages, prodNunjucks),
   buildFinish
 );
 

@@ -1,8 +1,109 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwind";
+@import "variables";
 
 body {
-  font-family: sans-serif;
-  font-size: 18px;
+  font-family: var(--base-font-family);
+  font-weight: var(--base-font-weight);
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: clamp(
+    var(--fluid-type-min, 1rem),
+    calc(1rem + var(--fluid-type-target, 3vw)),
+    var(--fluid-type-max, 1.3rem)
+  );
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--title-font-weight);
+  line-height: var(--title-line-height);
+}
+
+h1 {
+  // --fluid-type-min: 2.5rem;
+  // --fluid-type-max: 4rem;
+  // --fluid-type-target: 5vw;
+}
+
+h2 {
+  // --fluid-type-min: 1.8rem;
+  // --fluid-type-max: 3rem;
+}
+
+h3 {
+  // --fluid-type-min: 1.5rem;
+  // --fluid-type-max: 2.5rem;
+}
+
+//
+// Utility classes
+//
+
+.title__h-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  font-family: var(--base-font-family-serif);
+  font-weight: 700;
+  color: #6366f1;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #e0e7ff;
+  }
+}
+
+//
+// Typography
+//
+
+h2,
+h3,
+h4 {
+  color: #1e40af;
+}
+
+//
+// Page Components
+//
+
+.main-header {
+}
+
+.main-header__title {
+}
+
+.job {
+  &:last-of-type {
+    border-bottom: 0 !important;
+  }
+}
+
+.job__task-list {
+  li {
+    &:not(:last-of-type) {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.page-section {
 }
